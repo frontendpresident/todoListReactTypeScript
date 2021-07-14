@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import TaskItem from "./TaskItem";
-import { ITodo } from "../types/types";
+import React, { useState } from 'react';
+import TaskItem from './TaskItem';
+import { ITodo } from '../types/types';
 
 function TodoList() {
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState<string>('');
   const [task, setTask] = useState<ITodo[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -18,7 +18,7 @@ function TodoList() {
         isDone: false,
       };
       setTask((prevState) => [...prevState, newTask]);
-      setText("");
+      setText('');
     }
   };
 
@@ -33,7 +33,7 @@ function TodoList() {
           todo.isDone = !todo.isDone;
         }
         return todo;
-      })
+      }),
     );
   };
 
