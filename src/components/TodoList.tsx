@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
+import { FC } from 'react';
+import { ITodopProps } from '../types/types';
 import TaskItem from './TaskItem';
-import { ITodo } from '../types/types';
 
-function TodoList() {
+const TodoList: FC = () => {
   const [text, setText] = useState<string>('');
-  const [task, setTask] = useState<ITodo[]>([]);
+  const [tasks, setTask] = useState<ITodopProps[]>([]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setText(e.target.value);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
     if (text) {
-      const newTask: ITodo = {
-        id: task.length,
+      const newTask: ITodopProps = {
+        id: tasks.length,
         todo: text,
         isDone: false,
       };
@@ -22,12 +23,11 @@ function TodoList() {
     }
   };
 
-  const deleteTask = (id: number) => {
-    return setTask((prevState) => prevState.filter((item) => item.id !== id));
-  };
+  const deleteTask = (id: number): void =>
+    setTask((prevState) => prevState.filter((item) => item.id !== id));
 
-  const isDoneTask = (id: number) => {
-    return setTask((prevState) =>
+  const isDoneTask = (id: number): void =>
+    setTask((prevState) =>
       prevState.map((todo) => {
         if (todo.id === id) {
           todo.isDone = !todo.isDone;
@@ -35,10 +35,9 @@ function TodoList() {
         return todo;
       }),
     );
-  };
 
   return (
-    <div className="container">
+    <div className="container p-2">
       <div className="mb-3">
         <label className="form-label">Введите задачу:</label>
         <input className="form-control" value={text} onChange={handleChange} />
@@ -52,18 +51,16 @@ function TodoList() {
           Добавить
         </button>
       </div>
-      {task.map((task) => {
-        return (
-          <TaskItem
-            key={task.id}
-            tasks={task}
-            deleteTask={() => deleteTask(task.id)}
-            isDoneTask={() => isDoneTask(task.id)}
-          />
-        );
-      })}
+      {tasks.map((task) => (
+        <TaskItem
+          key={task.id}
+          tasks={task}
+          deleteTask={() => deleteTask(task.id)}
+          isDoneTask={() => isDoneTask(task.id)}
+        />
+      ))}
     </div>
   );
-}
+};
 
 export default TodoList;
