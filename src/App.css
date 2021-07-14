@@ -1,0 +1,13 @@
+.wrapper {
+  width: 700px;
+}
+
+.done {
+  color: green;
+  text-decoration: line-through;
+}
+
+.fas {
+  color: red;
+  font-size: 1.3em;
+}
