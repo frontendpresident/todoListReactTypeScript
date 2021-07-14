@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import TaskItem from "./TaskItem";
-import TaskOptions from "./TaskOptions";
-import { ITodo } from '../types/types'
+import { ITodo } from "../types/types";
 
 function TodoList() {
   const [text, setText] = useState<string>("");
@@ -18,27 +17,24 @@ function TodoList() {
         todo: text,
         isDone: false,
       };
-      setTask(prevState => [...prevState, newTask])
+      setTask((prevState) => [...prevState, newTask]);
       setText("");
     }
   };
 
   const deleteTask = (id: number) => {
-    const newArr = task.filter((item) => item.id !== id);
-    setTask(newArr);
+    return setTask((prevState) => prevState.filter((item) => item.id !== id));
   };
 
   const isDoneTask = (id: number) => {
-    const newArr = task.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          isDone: !item.isDone,
-        };
-      }
-      return item;
-    });
-    setTask(newArr);
+    return setTask((prevState) =>
+      prevState.map((todo) => {
+        if (todo.id === id) {
+          todo.isDone = !todo.isDone;
+        }
+        return todo;
+      })
+    );
   };
 
   return (
@@ -56,7 +52,7 @@ function TodoList() {
           Добавить
         </button>
       </div>
-      { task.map((task) => {
+      {task.map((task) => {
         return (
           <TaskItem
             key={task.id}
@@ -66,7 +62,6 @@ function TodoList() {
           />
         );
       })}
-      <TaskOptions />
     </div>
   );
 }
