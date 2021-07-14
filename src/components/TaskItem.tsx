@@ -1,4 +1,4 @@
-interface AppProps {
+type AppProps = {
   tasks?: any;
   deleteTask: () => void;
   isDoneTask: () => void;

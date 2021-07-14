@@ -1,10 +1,13 @@
 import './App.css';
-import CreateTask from './components/CreateTask';
+import TodoList from './components/TodoList';
 
 function App () {
   return (
     <div className="wrapper">
-     <CreateTask />
+      <div className='header'>
+        <h3>Список задач</h3>
+      </div>
+     <TodoList />
     </div>
   );
 }
